@@ -35,7 +35,7 @@ public class MemberController {
         log.info("회원 생성 요청 수신: email={}, name={}", request.email(), request.name());
         MemberResponse response = memberService.save(request);
 
-        log.info("회원 생성 완료: id={}, name={}", response.id(), response.name());
+        log.debug("회원 생성 완료: id={}, name={}", response.id(), response.name());
         return ResponseEntity.ok().body(response);
     }
 }

@@ -37,7 +37,7 @@ public class MemberLoginController {
                 .maxAge(1800000)
                 .build();
 
-        log.info("회원 로그인 성공: email={}", request.email());
+        log.debug("회원 로그인 완료: email={}", request.email());
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .build();
@@ -45,7 +45,7 @@ public class MemberLoginController {
 
     @GetMapping("/check")
     public ResponseEntity<LoginCheckResponse> checkLogin(@LoginMember final LoginMemberInfo info) {
-        log.debug("회원 로그인 상태 확인 요청: memberId={}", info.id());
+        log.info("회원 로그인 상태 확인 요청: memberId={}", info.id());
         Member member = loginService.findByMemberId(info.id());
 
         log.debug("회원 로그인 확인 완료: memberName={}", member.getName());

@@ -36,7 +36,8 @@ public class AdminReservationController {
         List<ReservationResponse> responses = reservationService.searchReservationWithCondition(condition);
 
         log.debug("검색된 예약 수: {}", responses.size());
-        return ResponseEntity.ok().body(responses);
+        return ResponseEntity.ok()
+                .body(responses);
     }
 
     @PostMapping("/reservations")
@@ -47,8 +48,9 @@ public class AdminReservationController {
                 new ReservationRequest(request.date(), request.timeId(), request.themeId()), request.memberId()
         );
 
-        log.info("예약 생성 완료: reservationId={}", response.id());
-        return ResponseEntity.created(URI.create("/admin/reservation")).body(response);
+        log.debug("예약 생성 완료: reservationId={}", response.id());
+        return ResponseEntity.created(URI.create("/admin/reservation"))
+                .body(response);
     }
 
     @GetMapping("/waitings")
@@ -57,7 +59,8 @@ public class AdminReservationController {
         List<ReservationResponse> waitings = reservationService.findAllWaitings();
 
         log.debug("대기 목록 조회 완료: {}건", waitings.size());
-        return ResponseEntity.ok().body(waitings);
+        return ResponseEntity.ok()
+                .body(waitings);
     }
 
     @DeleteMapping("/waitings/{id}")

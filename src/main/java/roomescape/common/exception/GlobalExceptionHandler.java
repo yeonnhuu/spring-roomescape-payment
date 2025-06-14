@@ -122,7 +122,6 @@ public class GlobalExceptionHandler {
             final String message,
             final HttpServletRequest request
     ) {
-        log.warn("Handled [{}] at [{}]: {}", status, request.getRequestURI(), message);
         final ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 status.value(),

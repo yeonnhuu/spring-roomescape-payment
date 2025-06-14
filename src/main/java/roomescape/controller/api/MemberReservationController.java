@@ -39,7 +39,7 @@ public class MemberReservationController {
                 memberInfo.id(), request.themeId(), request.date(), request.timeId());
         ReservationResponse response = reservationService.createReservationWithPayment(request, memberInfo.id());
 
-        log.info("예약 생성 완료: reservationId={}", response.id());
+        log.debug("예약 생성 완료: reservationId={}", response.id());
         return ResponseEntity.created(URI.create("/reservation")).body(response);
     }
 
@@ -51,7 +51,7 @@ public class MemberReservationController {
                 memberInfo.id(), request.themeId(), request.date(), request.timeId());
         WaitingResponse response = reservationService.createWaiting(request, memberInfo.id());
 
-        log.info("예약 대기 생성 완료: waitingId={}", response.id());
+        log.debug("예약 대기 생성 완료: waitingId={}", response.id());
         return ResponseEntity.created(URI.create("/reservation")).body(response);
     }
 
@@ -60,7 +60,7 @@ public class MemberReservationController {
         log.info("예약 대기 삭제 요청 수신: waitingId={}", id);
         reservationService.deleteWaiting(id);
 
-        log.info("예약 대기 삭제 완료: waitingId={}", id);
+        log.debug("예약 대기 삭제 완료: waitingId={}", id);
         return ResponseEntity.noContent().build();
     }
 

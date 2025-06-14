@@ -33,7 +33,7 @@ public class TimeSlotController {
         log.info("예약 시간 전체 조회 요청 수신");
         List<TimeSlotResponse> response = reservationTimeService.getTimeSlots();
 
-        log.info("예약 시간 전체 조회 완료: {}건", response.size());
+        log.debug("예약 시간 전체 조회 완료: {}건", response.size());
         return ResponseEntity.ok().body(response);
     }
 
@@ -42,7 +42,7 @@ public class TimeSlotController {
         log.info("조건 기반 예약 시간 조회 요청 수신: {}", request);
         List<TimeSlotConditionResponse> responses = reservationTimeService.getTimesWithCondition(request);
 
-        log.info("조건 기반 예약 시간 조회 완료: {}건", responses.size());
+        log.debug("조건 기반 예약 시간 조회 완료: {}건", responses.size());
         return ResponseEntity.ok().body(responses);
     }
 
@@ -51,7 +51,7 @@ public class TimeSlotController {
         log.info("예약 시간 생성 요청 수신: startAt={}", request.startAt());
         TimeSlotResponse response = reservationTimeService.createTimeSlot(request);
 
-        log.info("예약 시간 생성 완료: id={}, startAt={}", response.id(), response.startAt());
+        log.debug("예약 시간 생성 완료: id={}, startAt={}", response.id(), response.startAt());
         return ResponseEntity.created(URI.create(GET_ADMIN_TIME)).body(response);
     }
 
@@ -60,7 +60,7 @@ public class TimeSlotController {
         log.info("예약 시간 삭제 요청 수신: id={}", id);
         reservationTimeService.deleteTimeSlotById(id);
 
-        log.info("예약 시간 삭제 완료: id={}", id);
+        log.debug("예약 시간 삭제 완료: id={}", id);
         return ResponseEntity.noContent().build();
     }
 }

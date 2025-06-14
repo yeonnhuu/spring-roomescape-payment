@@ -36,7 +36,7 @@ public class AdminLoginController {
                 .path("/")
                 .build();
 
-        log.info("관리자 로그인 성공: email={}", request.email());
+        log.info("관리자 로그인 완료: email={}", request.email());
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .build();
@@ -44,11 +44,13 @@ public class AdminLoginController {
 
     @GetMapping("/check")
     public ResponseEntity<LoginCheckResponse> checkLogin(@LoginAdmin final LoginAdminInfo info) {
-        log.debug("관리자 로그인 확인 요청: adminId={}", info.id());
+        log.info("관리자 로그인 확인 요청: adminId={}", info.id());
         Admin admin = loginService.findByAdminId(info.id());
 
-        log.debug("관리자 로그인 확인 완료: adminName={}", admin.name());
         LoginCheckResponse response = new LoginCheckResponse(admin.name());
-        return ResponseEntity.ok().body(response);
+
+        log.debug("관리자 로그인 확인 완료: adminName={}", admin.name());
+        return ResponseEntity.ok()
+                .body(response);
     }
 }
