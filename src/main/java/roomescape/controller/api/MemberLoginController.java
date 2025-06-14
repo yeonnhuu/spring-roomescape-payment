@@ -1,5 +1,6 @@
 package roomescape.controller.api;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +27,7 @@ public class MemberLoginController {
     private final LoginService loginService;
 
     @PostMapping
-    public ResponseEntity<Void> login(@RequestBody final LoginRequest request) {
+    public ResponseEntity<Void> login(@Valid @RequestBody final LoginRequest request) {
         log.info("회원 로그인 요청: email={}", request.email());
         String token = loginService.createMemberToken(request);
 
